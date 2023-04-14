@@ -1,0 +1,12 @@
+{
+  "dependencies": {
+    "@openzeppelin/contracts": "^4.8.3"
+  },
+  "devDependencies": {
+    "@openzeppelin/test-environment": "^0.1.9",
+    "@openzeppelin/test-helpers": "^0.5.16",
+    "chai": "^4.3.7",
+    "ethers": "^6.3.0",
+    "mocha": "^10.2.0"
+  }
+}
