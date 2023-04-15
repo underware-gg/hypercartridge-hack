@@ -1,25 +1,27 @@
 # HyperCartridge
 
 ```
- _____________________
-|   _______________   |
- \ |_______________| / 
- | |_____HYPER_____| | 
- / |___CARTRIDGE___| \ 
-|  |_______________|  |  There once was a cartridge so hyper,
-|                     |  You could mint apps just like a sniper.
-|       Mintable      |  With logic and state,
-|    Collaborative    |  Collab'ing was great,
-|     Application     |  And deployable to ENS like a viper!
-|      Cartridges     |
-|                     |
-|                     |
-|__|_______________|__|
+  _____________________
+ |   _______________   |
+  \ |_______________| / 
+  | |_____HYPER_____| | 
+  / |___CARTRIDGE___| \ 
+ |  |_______________|  |  There once was a cartridge so hyper,
+ |                     |  It helped you mint apps like a sniper.
+ |       Mintable      |  With logic and state,
+ |    Collaborative    |  A commodore IDE; great!
+ |     Application     |  And deployable to ENS like a viper!
+ |      Cartridges     |
+ |                     |
+ |                     |
+ |__|_______________|__|
 
 ```
 
-HyperCartridge allows you to mint collaborative applications into an NFT and serve them via an ENS domain.
+HyperCartridge mints collaborative applications into NFT "cartridges", which can be retrieved and run locally, or optionally served as a static site or via an ENS domain.
 
-Each HyperCartridge NFT encapsulates the logic and state for an application that can be served from the NFT to a user. A HyperCartridge can be single player, or multiplayer by optionally specifying a server to run their state logic.
+Each HyperCartridge is a self-sovereign encapsulation of logic and state for an application. The first HyperCartridge is an IDE that can be used to design and mint more HyperCartridges.
 
-Each HyperCartridge NFT is comprised of the HyperCartridge kernel, application logic, and metadata such as the ENS domain and server.
+HyperCartridges are written using ValueScript (a dialect of TypeScript with value semantics) and can be used to make single player applications, or linked to an edge server to make collaborative, multiplayer applications.
+
+Each HyperCartridge is comprised of the HyperCartridge kernel (the "kernaal"), application logic written in ValueScript, and metadata (such as the server URL).

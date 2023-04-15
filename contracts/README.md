@@ -1,20 +1,20 @@
 # HyperCartridge Smart Contracts
 
 ```
- _____________________
-|   _______________   |
- \ |_______________| / 
- | |_____HYPER_____| | 
- / |___CARTRIDGE___| \ 
-|  |_______________|  |  There once was a cartridge so hyper,
-|                     |  You could mint apps just like a sniper.
-|       Mintable      |  With logic and state,
-|    Collaborative    |  Collab'ing was great,
-|     Application     |  And deployable to ENS like a viper!
-|      Cartridges     |
-|                     |
-|                     |
-|__|_______________|__|
+  _____________________
+ |   _______________   |
+  \ |_______________| / 
+  | |_____HYPER_____| | 
+  / |___CARTRIDGE___| \ 
+ |  |_______________|  |  There once was a cartridge so hyper,
+ |                     |  It helped you mint apps like a sniper.
+ |       Mintable      |  With logic and state,
+ |    Collaborative    |  A commodore IDE; great!
+ |     Application     |  And deployable to ENS like a viper!
+ |      Cartridges     |
+ |                     |
+ |                     |
+ |__!_______________!__|
 
 ```
 
