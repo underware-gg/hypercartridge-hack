@@ -1,11 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import path from 'path';
-import fs from 'fs/promises';
-
-export async function initVslib() {
-  const wasm: Record<string, any> = (await WebAssembly.instantiate(
-    await fs.readFile(path.resolve(path.dirname(import.meta.url.replace('file:///', '/')), './value_script_bg.wasm')),
+export async function initVslib(wasmUrl: string) {
+  const wasm: Record<string, any> = (await WebAssembly.instantiateStreaming(
+    fetch(wasmUrl),
     {
       './valuescript_wasm_bg.js': {
         __wbindgen_throw,
