@@ -2,6 +2,8 @@ import { renderTitle } from './components/title.ts';
 import { renderCodeEditor } from './components/codeEditor.ts';
 import { renderFileList } from './components/fileList.ts';
 import type { State, Text64Node } from './types.ts';
+import { renderFooterNav } from './components/footerNav.ts';
+import { renderDeploy } from './components/deploy.ts';
 
 export default function main(state: State | null, t: number, [cx, cy]: [number, number]): Text64Node {
   return [
