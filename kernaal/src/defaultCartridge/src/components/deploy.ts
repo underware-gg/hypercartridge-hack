@@ -1,4 +1,4 @@
-import { type Text64Node } from '../Text64Node';
+import { type Text64Node } from '../types.ts';
 import { renderFooterNav } from './footerNav';
 
 export function renderDeploy(time: number, cursorPos: [number, number]): Text64Node { 

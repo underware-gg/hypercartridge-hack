@@ -7,6 +7,14 @@ import { renderDeploy } from './components/deploy.ts';
 
 export default function main(state: State | null, t: number, [cx, cy]: [number, number]): Text64Node {
   return [
+    {
+      box: {
+        pos: [1, 1],
+        size: [78, 43],
+        color: '#636bff',
+      },
+    },
+
     // renderTitle(t, [cx, cy]),
     // renderCodeEditor('file1.ts', [
     //   `class Player {`,
@@ -46,8 +54,8 @@ export default function main(state: State | null, t: number, [cx, cy]: [number, 
         width: 100,
         text: `${state}`,
       },
-      { onKeyDown: ['ArrowUp', { op: 1 }] },
-      { onKeyDown: ['ArrowDown', { op: -1 }] },
+      // { onKeyDown: ['ArrowUp', { op: 1 }] },
+      // { onKeyDown: ['ArrowDown', { op: -1 }] },
     ],
   ];
 }

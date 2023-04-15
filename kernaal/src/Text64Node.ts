@@ -6,6 +6,13 @@ type Text64Node = Text64Node[] | {
   width: number; // TODO: Optional
   text: string;
   color?: string;
+  bgColor?: string;
+} | {
+  box: {
+    pos: [number, number];
+    size: [number, number];
+    color?: string;
+  }
 } | {
   onKeyDown: [string, Trigger]
 };
@@ -19,6 +26,7 @@ export default Text64Node;
 type Segment = {
   text: string;
   color?: string;
+  bgColor?: string;
 };
 
 type Line = Segment[];
@@ -54,11 +62,12 @@ export function linesFromText64(
         continue;
       }
 
-      if (s.color !== segment.color) {
+      if (s.color !== segment.color || s.bgColor !== segment.bgColor) {
         line.push(segment);
         segment = {
           text: s.text,
           color: s.color,
+          bgColor: s.bgColor,
         };
 
         continue;
@@ -88,6 +97,31 @@ function draw(
     draw([x + dx, y + dy], node.child, canvas);
   } else if ('onKeyDown' in node) {
     // Do nothing
+  } else if ('box' in node) {
+    if (node.box.color === undefined) {
+      return;
+    }
+
+    const [dx, dy] = node.box.pos;
+    const [width, height] = node.box.size;
+
+    for (let i = 0; i < height; i++) {
+      for (let j = 0; j < width; j++) {
+        const currY = y + dy + i;
+        const currX = x + dx + j;
+
+        if (
+          currY < 0 ||
+          currY >= canvas.length ||
+          currX < 0 ||
+          currX >= canvas[0].length
+        ) {
+          continue;
+        }
+
+        canvas[currY][currX].bgColor = node.box.color;
+      }
+    }
   } else {
     const height = canvas.length;
     const width = canvas[0].length;
@@ -108,10 +142,15 @@ function draw(
       const currX = x + node.pos[0] + dx;
 
       if (currX >= 0 && currX < width) {
-        canvas[currY][currX] = {
-          text: c,
-          color: node.color,
-        };
+        canvas[currY][currX].text = c;
+
+        if (node.color !== undefined) {
+          canvas[currY][currX].color = node.color;
+        }
+
+        if (node.bgColor !== undefined) {
+          canvas[currY][currX].bgColor = node.bgColor;
+        }
       }
 
       dx++;
@@ -139,6 +178,10 @@ export function renderText64(
 
       if (segment.color) {
         span.style.color = segment.color;
+      }
+
+      if (segment.bgColor) {
+        span.style.backgroundColor = segment.bgColor;
       }
 
       screen.appendChild(span);

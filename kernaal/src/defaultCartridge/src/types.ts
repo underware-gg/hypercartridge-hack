@@ -9,6 +9,13 @@ export type Text64Node = Text64Node[] | {
   width: number; // TODO: Optional
   text: string;
   color?: string;
+  bgColor?: string;
+} | {
+  box: {
+    pos: [number, number];
+    size: [number, number];
+    color?: string;
+  }
 } | {
   onKeyDown: [string, Trigger]
 };
