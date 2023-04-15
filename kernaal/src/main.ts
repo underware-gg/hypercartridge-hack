@@ -27,14 +27,14 @@ async function renderLoop() {
   appElement.textContent = '';
 
   appElement.appendChild(
-    renderApp(Date.now() - startTime, cursorPos),
+    renderText64([canvasWidth, canvasHeight], renderApp(Date.now() - startTime, cursorPos)),
   );
 
   requestAnimationFrame(renderLoop);
 }
 
 function renderApp(t: number, cursorPos: [number, number]) {
-  return renderText64([canvasWidth, canvasHeight], [
+  return [
     {
       pos: [10, 10],
       width: 100,
@@ -56,7 +56,7 @@ function renderApp(t: number, cursorPos: [number, number]) {
       width: 1,
       text: '█',
     },
-  ]);
+  ];
 }
 
 requestAnimationFrame(renderLoop);
