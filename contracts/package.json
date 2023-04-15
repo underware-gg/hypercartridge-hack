@@ -7,7 +7,7 @@
     "test": "test"
   },
   "scripts": {
-    "test": "mocha --exit --recursive"
+    "test": "truffle test"
   },
   "dependencies": {
     "@openzeppelin/contracts": "^4.8.3"
