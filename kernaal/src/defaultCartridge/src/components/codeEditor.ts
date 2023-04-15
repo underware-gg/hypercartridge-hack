@@ -1,4 +1,4 @@
-import { type Text64Node } from "../Text64Node";
+import { type Text64Node } from "../types";
 
 export function renderCodeEditor(filename: string, code: string[], offset: number): Text64Node {
     const NUM_ELEMENTS = 6;

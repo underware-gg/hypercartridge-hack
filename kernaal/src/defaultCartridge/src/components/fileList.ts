@@ -1,4 +1,4 @@
-import { type Text64Node } from "../Text64Node";
+import { type Text64Node } from "../types";
 
 export function renderFileList(cartName: string, files: { id: string, name: string }[], offset: number): Text64Node {
     const NUM_ELEMENTS = 6;

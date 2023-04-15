@@ -1,4 +1,4 @@
-import { type Text64Node } from "../Text64Node";
+import { type Text64Node } from "../types";
 
 export function renderTitle(time: number, cursorPos: [number, number]): Text64Node {
     return [
