@@ -1,9 +1,9 @@
-import type { Text64Node } from './Text64Node.ts';
 import { renderTitle } from './components/title.ts';
 import { renderCodeEditor } from './components/codeEditor.ts';
 import { renderFileList } from './components/fileList.ts';
+import type { State, Text64Node } from './types.ts';
 
-export default function main(t: number, [cx, cy]: [number, number]): Text64Node {
+export default function main(state: State | null, t: number, [cx, cy]: [number, number]): Text64Node {
   return [
     // renderTitle(t, [cx, cy]),
     // renderCodeEditor('file1.ts', [
@@ -36,5 +36,15 @@ export default function main(t: number, [cx, cy]: [number, number]): Text64Node 
       width: 100,
       text: '█',
     },
+
+    [
+      {
+        pos: [cx + 2, cy],
+        width: 100,
+        text: `${state}`,
+      },
+      { onKeyDown: ['ArrowUp', { op: 1 }] },
+      { onKeyDown: ['ArrowDown', { op: -1 }] },
+    ],
   ];
 }

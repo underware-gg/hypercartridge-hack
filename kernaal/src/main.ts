@@ -1,7 +1,8 @@
-import Text64Node, { renderText64 } from './Text64Node';
+import Text64Node, { Trigger, getTriggers, renderText64 } from './Text64Node';
 import './style.css';
 import VslibPool from './vslib/VslibPool';
 import defaultCartridge from './defaultCartridge/index.ts';
+import { Mutex } from 'wait-your-turn';
 
 const canvasWidth = 80;
 const canvasHeight = 45;
@@ -27,19 +28,56 @@ window.addEventListener('mousemove', (e) => {
   ];
 });
 
+let state: unknown = null;
+
+let keyTriggers: Record<string, Trigger[]> = {};
+
+const stateUpdateMutex = new Mutex();
+
+async function processOp(op: unknown) {
+  await stateUpdateMutex.use(async () => {
+    const result = await pool.run(
+      '/update.ts',
+      defaultCartridge,
+      [state, op],
+    ).wait();
+
+    if ('Err' in result.output) {
+      console.error(result.output.Err);
+      return;
+    }
+
+    state = JSON.parse(result.output.Ok);
+  });
+}
+
+window.addEventListener('keydown', async (e) => {
+  for (const trigger of keyTriggers[e.key] ?? []) {
+    if ('op' in trigger) {
+      await processOp(trigger.op);
+    }
+  }
+});
+
 async function renderLoop() {
-  const newRender = renderText64([canvasWidth, canvasHeight], await renderApp(Date.now() - startTime, cursorPos));
+  const node = await renderApp(state, Date.now() - startTime, cursorPos);
+  keyTriggers = getTriggers(node);
+  const newRender = renderText64([canvasWidth, canvasHeight], node);
   appElement.textContent = '';
   appElement.appendChild(newRender);
 
   requestAnimationFrame(renderLoop);
 }
 
-async function renderApp(t: number, cursorPos: [number, number]): Promise<Text64Node> {
+async function renderApp(
+  state: unknown,
+  t: number,
+  cursorPos: [number, number],
+): Promise<Text64Node> {
   const result = await pool.run(
     '/render.ts',
     defaultCartridge,
-    [t, cursorPos],
+    [state, t, cursorPos],
   ).wait();
 
   if ('Err' in result.output) {
