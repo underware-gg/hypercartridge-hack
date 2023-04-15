@@ -15,7 +15,9 @@
   "devDependencies": {
     "@openzeppelin/test-environment": "^0.1.9",
     "@openzeppelin/test-helpers": "^0.5.16",
+    "@truffle/hdwallet-provider": "^2.1.9",
     "chai": "^4.3.7",
+    "dotenv": "^16.0.3",
     "ethers": "^6.3.0",
     "mocha": "^10.2.0",
     "truffle-plugin-verify": "^0.6.2"

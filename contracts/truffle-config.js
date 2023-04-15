@@ -18,11 +18,10 @@
  *
  */
 
-// require('dotenv').config();
-// const mnemonic = process.env["MNEMONIC"];
-// const infuraProjectId = process.env["INFURA_PROJECT_ID"];
+
+require('dotenv').config();
  
-// const HDWalletProvider = require('@truffle/hdwallet-provider');
+const HDWalletProvider = require('@truffle/hdwallet-provider');
 
 module.exports = {
   /**
@@ -43,15 +42,15 @@ module.exports = {
     // options below to some value.
     //
     // development: {
-    //  host: "127.0.0.1",     // Localhost (default: none)
-    //  port: 8545,            // Standard Ethereum port (default: none)
-    //  network_id: "*",       // Any network (default: none)
-    // },
-    //
+    //   host: "127.0.0.1",     // Localhost (default: none)
+    //   port: 7545,            // Standard Ethereum port (default: none)
+    //   network_id: "*",       // Any network (default: none)
+    // },   
     // goerli: {
-    //   provider: () => new HDWalletProvider(mnemonic, `https://goerli.infura.io/v3/${infuraProjectId}`),
+    //   provider: () => new HDWalletProvider(process.env.MNEMONIC, `https://goerli.infura.io/v3/${process.env.INFURA_PROJECT_ID}`),
     //   network_id: 5,       // Goerli's id
-    //   chain_id: 5
+    //   chain_id: 5,
+    //   from: '' // TODO wallet addr
     // }
   },
 
@@ -65,5 +64,14 @@ module.exports = {
     solc: {
       version: "0.8.13",      // Fetch exact version from solc-bin
     }
-  }
+  },
+
+  plugins: [
+    // 'truffle-contract-size',
+    'truffle-plugin-verify'
+  ],
+  api_keys: {
+    // https://kalis.me/verify-truffle-smart-contracts-etherscan/
+    etherscan: process.env.ETHERSCAN_API_KEY
+  },
 };

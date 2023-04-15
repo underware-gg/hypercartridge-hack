@@ -73,7 +73,7 @@ describe(`HyperCartridgeToken (${require('path').basename(__filename)})`, () => 
 
     it('tokenURI()', async () => {
       // invalid, must revert
-      await expectRevert(_instance.tokenURI(0), 'Hyperbox: invalid token ID')
+      await expectRevert(_instance.tokenURI(0), 'HyperCartridge: invalid token ID')
       
       // check metadata contents
       let metadata = await _instance.tokenURI(1)
@@ -89,7 +89,7 @@ describe(`HyperCartridgeToken (${require('path').basename(__filename)})`, () => 
 
     it('setState(), getState()', async () => {
       // invalid, must revert
-      await expectRevert(_instance.getState(0), 'Hyperbox: invalid token ID')
+      await expectRevert(_instance.getState(0), 'HyperCartridge: invalid token ID')
 
       // initial state is empty
       let state = await _instance.getState(1)
@@ -97,7 +97,7 @@ describe(`HyperCartridgeToken (${require('path').basename(__filename)})`, () => 
 
       // only the owner can write
       const _sampleState = '{}'
-      await expectRevert(_instance.setState(1, _sampleState, { from: accountOne }), 'Hyperbox: not owner')
+      await expectRevert(_instance.setState(1, _sampleState, { from: accountOne }), 'HyperCartridge: not owner')
       expectEvent(await _instance.setState(1, _sampleState, { from: owner }), 'StateChanged', { tokenId: '1' })
 
       // anyone can read
