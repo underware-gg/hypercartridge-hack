@@ -31,6 +31,8 @@ export type Trigger = {
   op: Operation,
 } | {
   loadCartridge: Record<string, string>,
+} | {
+  deploy: Record<string, string>,
 };
 
 export type StandardEvent = {

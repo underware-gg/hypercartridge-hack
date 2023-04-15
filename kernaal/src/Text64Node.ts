@@ -21,6 +21,8 @@ export type Trigger = {
   op: unknown,
 } | {
   loadCartridge: Record<string, string>,
+} | {
+  deploy: Record<string, string>,
 };
 
 export default Text64Node;
