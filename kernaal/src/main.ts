@@ -1,5 +1,6 @@
-import { renderText64 } from './Text64Node';
+import Text64Node, { renderText64 } from './Text64Node';
 import './style.css';
+import { renderTitle } from './components/title';
 
 const canvasWidth = 80;
 const canvasHeight = 45;
@@ -33,7 +34,7 @@ async function renderLoop() {
   requestAnimationFrame(renderLoop);
 }
 
-function renderApp(t: number, cursorPos: [number, number]) {
+function renderApp(t: number, cursorPos: [number, number]): Text64Node {
   return [
     {
       pos: [10, 10],
@@ -56,6 +57,7 @@ function renderApp(t: number, cursorPos: [number, number]) {
       width: 1,
       text: '█',
     },
+    renderTitle(t, cursorPos),
   ];
 }
 

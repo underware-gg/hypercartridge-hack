@@ -142,3 +142,5 @@ export function renderText64(
 
   return screen;
 }
+
+export type Render64Fn = (time: number, cursorPos: [number, number]) => Text64Node;
