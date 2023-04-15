@@ -1,7 +1,7 @@
 import Text64Node, { renderText64 } from './Text64Node';
 import './style.css';
-import { renderTitle } from './components/title';
 import VslibPool from './vslib/VslibPool';
+import renderSource from './defaultCartridge/render.ts?raw';
 
 const canvasWidth = 80;
 const canvasHeight = 45;
@@ -36,43 +36,33 @@ async function renderLoop() {
 }
 
 async function renderApp(t: number, cursorPos: [number, number]): Promise<Text64Node> {
-  const result = await pool.run('/main.ts', {
-    '/main.ts': `
-      export default function main() {
-        return 1 + 1;
-      }
-    `,
-  }).wait();
+  const result = await pool.run('/render.ts', {
+    '/render.ts': renderSource,
+  }, [t, cursorPos]).wait();
 
-  return [
-    {
-      pos: [10, 10],
-      width: 100,
-      text: 'HyperCartridge',
-    },
-    {
-      pos: [10, 11],
-      width: 1,
-      text: 'yperCartridge',
-    },
-    Math.floor(t / 500) % 2 === 0 ? 
+  if ('Err' in result.output) {
+    return [
       {
-        pos: [15, 15],
+        pos: [0, 0],
+        width: 100,
+        text: `Error: ${result.output.Err}`,
+      },
+      Object.values(result.diagnostics).flat().map((d, i) => ({
+        pos: [0, i + 1],
+        width: 100,
+        text: `  ${d.span.start}: ${d.level}: ${d.message}`,
+      })),
+      {
+        pos: cursorPos,
         width: 1,
-        text: '░',
-      } : [],
-    {
-      pos: cursorPos,
-      width: 1,
-      text: '█',
-    },
-    renderTitle(t, cursorPos),
-    {
-      pos: [20, 25],
-      width: 100,
-      text: `1 + 1 is ${JSON.stringify(result.output)}`,
-    },
-  ];
+        text: '█',
+      },
+    ];
+  }
+
+  const node = JSON.parse(result.output.Ok);
+
+  return node;
 }
 
 requestAnimationFrame(renderLoop);
