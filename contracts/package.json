@@ -17,6 +17,7 @@
     "@openzeppelin/test-helpers": "^0.5.16",
     "chai": "^4.3.7",
     "ethers": "^6.3.0",
-    "mocha": "^10.2.0"
+    "mocha": "^10.2.0",
+    "truffle-plugin-verify": "^0.6.2"
   }
 }
