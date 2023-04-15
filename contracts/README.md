@@ -9,8 +9,8 @@
 |  |_______________|  |  There once was a cartridge so hyper,
 |                     |  You could mint apps just like a sniper.
 |       Mintable      |  With logic and state,
-|     Multiplayer     |  Collab'ing was great,
-|         NFT         |  And deployable to ENS like a viper!
+|    Collaborative    |  Collab'ing was great,
+|     Application     |  And deployable to ENS like a viper!
 |      Cartridges     |
 |                     |
 |                     |
