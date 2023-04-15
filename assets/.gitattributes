@@ -6,3 +6,6 @@ hypercartridge-outro.png filter=lfs diff=lfs merge=lfs -text
 title-bg.png filter=lfs diff=lfs merge=lfs -text
 hypercartridge-splash filter=lfs diff=lfs merge=lfs -text
 hypercartridge.png filter=lfs diff=lfs merge=lfs -text
+Biodecay[[:space:]]-[[:space:]]The[[:space:]]Loneliness[[:space:]]of[[:space:]]Vacuum.aup3 filter=lfs diff=lfs merge=lfs -text
+Biodecay[[:space:]]-[[:space:]]The[[:space:]]Loneliness[[:space:]]of[[:space:]]Vacuum.mp3 filter=lfs diff=lfs merge=lfs -text
+hyperbox-outro.mp3 filter=lfs diff=lfs merge=lfs -text
