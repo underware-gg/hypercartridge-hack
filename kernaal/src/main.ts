@@ -51,6 +51,9 @@ async function processOp(op: unknown) {
   });
 }
 
+const bgAudioEl = document.getElementById('bg-audio') as HTMLAudioElement;
+let playStarted = false;
+
 window.addEventListener('keydown', async (e) => {
   await processOp({ keyDown: e.key });
 
@@ -62,6 +65,14 @@ window.addEventListener('keydown', async (e) => {
 });
 
 async function renderLoop() {
+  if (!playStarted) {
+    if (bgAudioEl.currentTime !== 0) {
+      playStarted = true;
+    } else {
+      bgAudioEl.play();
+    }
+  }
+
   const node = await renderApp(state, Date.now() - startTime, cursorPos);
   keyTriggers = getTriggers(node);
   const newRender = renderText64([canvasWidth, canvasHeight], node);
