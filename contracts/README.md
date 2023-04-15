@@ -79,5 +79,5 @@ npm test
 Run one single test script
 
 ```
-npm test test/metacoin.js
+npm test test/HyperCartridge.js
 ```
