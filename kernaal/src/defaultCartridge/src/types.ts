@@ -1,5 +1,5 @@
-export type State = number;
-export type Operation = number;
+export type State = string;
+export type Operation = never;
 
 export type Text64Node = Text64Node[] | {
   pos: [number, number];
