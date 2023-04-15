@@ -1,11 +1,9 @@
-import 'web-worker';
-
-import * as valuescript from 'valuescript';
+import * as valuescript from './valuescript/index.ts';
 import nil from '../helpers/nil.ts';
 import { initVslib } from './index.ts';
 
-async function main() {
-  const vslib = await initVslib();
+async function main(wasmUrl: string) {
+  const vslib = await initVslib(wasmUrl);
 
   self.postMessage('ready');
 
@@ -58,9 +56,11 @@ async function main() {
   }
 }
 
+const wasmUrl = import.meta.url.replace('VslibPool.ts', 'value_script_bg.wasm');
+
 const workerScript = [
   initVslib.toString(),
-  `(${main.toString()})()`,
+  `(${main.toString()})('${wasmUrl}')`,
 ].join('\n\n');
 
 const workerUrl = URL.createObjectURL(

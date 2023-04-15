@@ -18,6 +18,7 @@
     "prettier": "^2.8.7",
     "typescript": "^5.0.4",
     "valuescript": "^0.0.4",
+    "wait-your-turn": "^1.0.1",
     "web-worker": "^1.2.0"
   }
 }

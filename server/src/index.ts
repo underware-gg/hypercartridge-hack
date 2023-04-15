@@ -1,33 +1,40 @@
-import { initVslib } from './vslib/index.ts';
+import VslibPool from './vslib/VslibPool.ts';
 
-let vslib: ReturnType<typeof initVslib> | undefined;
+const pool = new VslibPool();
 
-async function getVslib() {
-  if (vslib === undefined) {
-    vslib = initVslib();
-  }
+const server = Deno.listen({ port: 8080 });
+console.log('ValueScript server running');
+console.log();
+console.log('Example usage:');
+console.log();
+console.log('  curl -X POST -d \'return 1 + 1;\' http://localhost:8080');
+console.log('  -> {"Ok":"2"}');
+console.log();
+console.log('  curl -X POST -d \'while (true) {} return 1 + 1;\' http://localhost:8080');
+console.log('  -> {"Err":"Error{\\"message\\":\\"step limit reached\\"}"}');
 
-  return await vslib;
+for await (const conn of server) {
+  serveHttp(conn);
 }
 
-export default {
-  port: 3000,
-  fetch(request: Request) {
-    return new Response('Welcome to Bun!');
-  },
-};
+async function serveHttp(conn: Deno.Conn) {
+  const httpConn = Deno.serveHttp(conn);
 
-(async () => {
-  const vslib = await getVslib();
-  console.log(vslib.run('/main.ts', (path) => {
-    if (path === '/main.ts') {
-      return `
-        export default function main() {
-          return 3n ** 5n;
-        }
-      `;
-    }
+  for await (const requestEvent of httpConn) {
+    requestEvent.request.text().then(async text => {
+      const job = pool.run('/main.ts', {
+        '/main.ts': `
+          export default function main() {
+            ${text}
+          }
+        `,
+      });
 
-    throw new Error('not found');
-  }));
-})();
+      const result = await job.wait();
+
+      requestEvent.respondWith(new Response(JSON.stringify(result.output), {
+        status: 200,
+      }));
+    });
+  }
+}
