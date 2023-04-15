@@ -16,3 +16,7 @@ export type Text64Node = Text64Node[] | {
 export type Trigger = {
   op: Operation,
 };
+
+export type StandardEvent = {
+  keyDown: string;
+};

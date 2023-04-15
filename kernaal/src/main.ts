@@ -52,6 +52,8 @@ async function processOp(op: unknown) {
 }
 
 window.addEventListener('keydown', async (e) => {
+  await processOp({ keyDown: e.key });
+
   for (const trigger of keyTriggers[e.key] ?? []) {
     if ('op' in trigger) {
       await processOp(trigger.op);
