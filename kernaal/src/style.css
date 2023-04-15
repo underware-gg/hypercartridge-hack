@@ -31,4 +31,5 @@ body {
 #app {
   white-space: pre;
   background-color: #535bf2;
+  cursor: none;
 }
