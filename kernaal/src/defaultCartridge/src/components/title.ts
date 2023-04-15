@@ -38,7 +38,7 @@ export function renderTitle(t: number, state: State): Text64Node {
   if (state.selectionIndex === 1) { // Run
     nodes.push({
       onKeyDown: ['Enter', {
-        loadCartridge: makeTestCartridge(),
+        loadCartridge: makeCartridge(state),
       }],
     });
   }
@@ -46,7 +46,7 @@ export function renderTitle(t: number, state: State): Text64Node {
   return nodes;
 };
 
-function makeTestCartridge() {
+function makeCartridge(state: State) {
   return {
     '/update.ts': `
       export default function() {
@@ -54,16 +54,6 @@ function makeTestCartridge() {
       }
     `,
 
-    '/render.ts': `
-      export default function() {
-        return [
-          {
-            pos: [10, 10],
-            width: 100,
-            text: 'Hello World',
-          },
-        ];
-      }
-    `,
+    '/render.ts': state.code.join('\n'),
   };
 }

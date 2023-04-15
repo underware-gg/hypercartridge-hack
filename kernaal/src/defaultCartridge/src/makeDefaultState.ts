@@ -6,7 +6,17 @@ export default function makeDefaultState(): State {
     selectionIndex: 0,
     maxSelectionIndex: 2,
     column: 0,
-    code: [],
+    code: [
+      'export default function() {',
+      '  return [',
+      '    {',
+      '      pos: [10, 10],',
+      '      width: 100,',
+      '      text: \'Hello World\',',
+      '    },',
+      '  ];',
+      '}',
+    ],
     offset: 0,
   };
 }
