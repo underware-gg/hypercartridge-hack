@@ -32,4 +32,5 @@ body {
   white-space: pre;
   background-color: #535bf2;
   cursor: none;
+  user-select: none;
 }

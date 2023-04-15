@@ -6,6 +6,12 @@ type Text64Node = Text64Node[] | {
   width: number; // TODO: Optional
   text: string;
   color?: string;
+} | {
+  onKeyDown: [string, Trigger]
+};
+
+export type Trigger = {
+  op: unknown,
 };
 
 export default Text64Node;
@@ -80,6 +86,8 @@ function draw(
   } else if ('child' in node) {
     const [dx, dy] = node.pos;
     draw([x + dx, y + dy], node.child, canvas);
+  } else if ('onKeyDown' in node) {
+    // Do nothing
   } else {
     const height = canvas.length;
     const width = canvas[0].length;
@@ -144,3 +152,29 @@ export function renderText64(
 }
 
 export type Render64Fn = (time: number, cursorPos: [number, number]) => Text64Node;
+
+export function getTriggers(node: Text64Node): Record<string, Trigger[]> {
+  const triggers: Record<string, Trigger[]> = {};
+
+  for (const [key, trigger] of getTriggerList(node)) {
+    if (key in triggers) {
+      triggers[key].push(trigger);
+    } else {
+      triggers[key] = [trigger];
+    }
+  }
+
+  return triggers;
+}
+
+function getTriggerList(node: Text64Node): [string, Trigger][] {
+  if (Array.isArray(node)) {
+    return node.flatMap(getTriggerList);
+  } else if ('child' in node) {
+    return getTriggerList(node.child);
+  } else if ('onKeyDown' in node) {
+    return [node.onKeyDown];
+  } else {
+    return [];
+  }
+}
