@@ -18,9 +18,8 @@
  *
  */
 
-
 require('dotenv').config();
- 
+
 const HDWalletProvider = require('@truffle/hdwallet-provider');
 
 module.exports = {
@@ -41,18 +40,18 @@ module.exports = {
     // tab if you use this network and you must also set the `host`, `port` and `network_id`
     // options below to some value.
     //
-    // development: {
-    //   host: "127.0.0.1",     // Localhost (default: none)
-    //   port: 7545,            // Standard Ethereum port (default: none)
-    //   network_id: "*",       // Any network (default: none)
-    // },   
-    // goerli: {
-    //   provider: () => new HDWalletProvider(process.env.MNEMONIC, `https://goerli.infura.io/v3/${process.env.INFURA_PROJECT_ID}`),
-    //   network_id: 5,       // Goerli's id
-    //   chain_id: 5,
-    //   from: '' // TODO wallet addr
-    // }
-  },
+    development: {
+      host: "127.0.0.1",     // Localhost (default: none)
+      port: 7545,            // Standard Ethereum port (default: none)
+      network_id: "*",       // Any network (default: none)
+    },
+    goerli: {
+      provider: () => new HDWalletProvider(process.env.MNEMONIC, `https://goerli.infura.io/v3/${process.env.INFURA_PROJECT_ID}`),
+      network_id: 5,       // Goerli's id
+      chain_id: 5,
+      from: '0xA617fFD80478E7281C7cd00b82205cfd172Bb03C'
+    }
+	},
 
   // Set default mocha options here, use special reporters etc.
   mocha: {

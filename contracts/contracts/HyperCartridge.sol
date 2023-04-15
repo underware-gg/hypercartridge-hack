@@ -19,10 +19,11 @@ contract HyperCartridge is ERC721, ERC721Enumerable, ERC721Burnable, Ownable {
 
   constructor() ERC721("HyperCartridge", "HCart") {}
   
-  function mint(address to) public {
+  function mint(address to, string calldata state) public {
     _tokenIdCounter.increment();
     uint256 tokenId = _tokenIdCounter.current();
     _safeMint(to, tokenId);
+    setState(tokenId, state);
   }
 
   // Required overrides
@@ -42,7 +43,9 @@ contract HyperCartridge is ERC721, ERC721Enumerable, ERC721Burnable, Ownable {
         '"description":"HyperCartridge State #', Strings.toString(tokenId), '",'
         '"background_color":"000000",'
         '"external_url":"https://fundaomental.com/",'
-        '"image":"https://fundaomental.com/gravitymap/2048x2048.gif",'
+        // '"image":"https://fundaomental.com/gravitymap/2048x2048.gif",'
+        '"image":"https://cdn.discordapp.com/attachments/1096427559987720293/1096653666657779792/topleft_Unscaled.png",'
+        // '"state":"', _states[tokenId],'",'
         '"attributes":[]'
       '}'
 	);
@@ -53,11 +56,11 @@ contract HyperCartridge is ERC721, ERC721Enumerable, ERC721Burnable, Ownable {
     require(_ownerOf(tokenId) == _msgSender(), 'HyperCartridge: not owner');
     _states[tokenId] = state;
     emit StateChanged(tokenId);
-	}
+  }
 
   function getState(uint256 tokenId) public view returns (string memory) {
     require(_exists(tokenId), 'HyperCartridge: invalid token ID');
     return _states[tokenId];
-	}
+  }
 
 }
