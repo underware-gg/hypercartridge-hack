@@ -62,10 +62,22 @@ Install OpenZeppelin test environment (for local development only)
 npm install --save-dev @openzeppelin/test-environment @openzeppelin/test-helpers chai mocha ethers
 ```
 
-## Step 5
+# Building and testing
 
 Compile the contract artifacts in `/build`, containing the ABI
 
 ```
 truffle compile
+```
+
+Run all the tests located in `/test`
+
+```
+truffle test
+```
+
+Run one single test script
+
+```
+truffle test test/metacoin.js
 ```
