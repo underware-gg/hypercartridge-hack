@@ -10,7 +10,7 @@ export function renderFileList(title: string, files: { id: string, name: string 
   const shouldRenderDown = offset + NUM_ELEMENTS < files.length;
   const renderedFiles = files.slice(offset, offset + NUM_ELEMENTS);
 
-  const nodes: Text64Node = [
+  let nodes: Text64Node = [
     {
       pos: [10, 10],
       width: 100,
