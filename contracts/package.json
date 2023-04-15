@@ -1,4 +1,8 @@
 {
+  "name": "hypercartridge-contracts",
+  "main": "truffle-config.js",
+  "version": "0.0.1",
+  "author": "Rob Morris <r@fundaomental.com> (https://twitter.com/recipromancer/status/1615870551096176641?s=20)",
   "dependencies": {
     "@openzeppelin/contracts": "^4.8.3"
   },
