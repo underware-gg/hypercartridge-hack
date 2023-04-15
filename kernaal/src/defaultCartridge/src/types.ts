@@ -1,4 +1,11 @@
-export type State = string;
+export type State = {
+  page: string;
+  selectionIndex: number;
+  maxSelectionIndex: number;
+  column: number;
+  code: string[];
+  offset: number;
+};
 export type Operation = never;
 
 export type Text64Node = Text64Node[] | {

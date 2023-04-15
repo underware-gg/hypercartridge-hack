@@ -8,7 +8,13 @@ export function renderDeploy(time: number, cursorPos: [number, number]): Text64N
       width: 100,
       text: 'Deploy',
     },
-    renderFooterNav(['[U]p', '[D]own', 'Enter']),
+    {
+      pos: [10, 15],
+      width: 100,
+      text: 'Cartridge Name',
+    },
+
+    renderFooterNav(['Esc', 'Enter']),
   ];
 
 }

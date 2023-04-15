@@ -1,32 +1,42 @@
-import { type Text64Node } from '../types';
-import { type Text64Node } from '../Text64Node';
+import type { Text64Node, State } from '../types';
 import { renderFooterNav } from './footerNav';
+import { renderCursor } from './cursor';
 
-export function renderCodeEditor(filename: string, code: string[], offset: number): Text64Node {
-  const NUM_ELEMENTS = 6;
-  const SPACING = 3;
+export function renderCodeEditor(t: number, state: State, offset: number): Text64Node {
+  const { code, selectionIndex, column } = state;
+  const NUM_ELEMENTS = 17;
+  const SPACING = 2;
 
   const shouldRenderUp = offset > 0;
   const shouldRenderDown = offset + NUM_ELEMENTS < code.length;
   const renderedCode = code.slice(offset, offset + NUM_ELEMENTS);
 
-  const nodes: Text64Node = [
+  let nodes: Text64Node[] = [
     {
-      pos: [10, 10],
-      width: 100,
-      text: `[${filename}]`,
+      box: {
+        pos: [4, 4],
+        size: [68, NUM_ELEMENTS * 2],
+        color: '#636bff',
+      },
     },
+
+    // {
+    //   pos: [10, 10],
+    //   width: 100,
+    //   text: `[${filename}]`,
+    // },
     renderedCode.map((line, index) => ({
-      pos: [10, 16 + index * SPACING],
+      pos: [5, 5 + index * SPACING],
       width: 100,
       text: line,
     })),
     renderFooterNav(['Esc']),
+    renderCursor(t, [5 + column, 5 + selectionIndex * SPACING]),
   ];
 
   if (shouldRenderUp) {
-    nodes.unshift({
-      pos: [10, 13],
+    nodes.push({
+      pos: [10, 3],
       width: 100,
       text: '▲',
     });
@@ -34,7 +44,7 @@ export function renderCodeEditor(filename: string, code: string[], offset: numbe
 
   if (shouldRenderDown) {
     nodes.push({
-      pos: [10, 16 + NUM_ELEMENTS * SPACING],
+      pos: [10, 5 + NUM_ELEMENTS * SPACING],
       width: 100,
       text: '▼',
     });

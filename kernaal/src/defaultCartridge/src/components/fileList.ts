@@ -1,8 +1,9 @@
-import { type Text64Node } from '../types';
-import { type Text64Node } from '../Text64Node';
 import { renderFooterNav } from './footerNav';
+import { renderCursor } from './cursor';
+import type { State, Text64Node } from '../types';
 
-export function renderFileList(title: string, files: { id: string, name: string }[], offset: number): Text64Node {
+export function renderFileList(t: number, state: State, title: string, files: { id: string, name: string }[], offset: number): Text64Node {
+  const { selectionIndex } = state;
   const NUM_ELEMENTS = 6;
   const SPACING = 3;
 
@@ -22,6 +23,7 @@ export function renderFileList(title: string, files: { id: string, name: string 
       text: name,
     })),
     renderFooterNav(['Esc', '[U]p', '[D]own', 'Enter', '[C]reate', '[D]elete', '[U]pdate']),
+    renderCursor(t, [8, 15 + selectionIndex * 5]),
   ];
 
   if (shouldRenderUp) {

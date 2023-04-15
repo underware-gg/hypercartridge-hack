@@ -1,7 +1,10 @@
-import { type Text64Node } from '../types';
+import type { State, Text64Node } from '../types';
+import { renderCursor } from './cursor';
 import { renderFooterNav } from './footerNav';
 
-export function renderTitle(time: number, cursorPos: [number, number]): Text64Node {
+export function renderTitle(t: number, state: State): Text64Node {
+  const { selectionIndex } = state;
+
   return [
     {
       pos: [10, 10],
@@ -12,20 +15,18 @@ export function renderTitle(time: number, cursorPos: [number, number]): Text64No
       pos: [10, 15],
       width: 100,
       text: 'Edit',
-      // selectable: true,
     },
     {
       pos: [10, 20],
       width: 100,
       text: 'Run',
-      // selectable: true,
     },
     {
       pos: [10, 25],
       width: 100,
       text: 'Deploy',
-      // selectable: true,
     },
     renderFooterNav(['[U]p', '[D]own', 'Enter']),
+    renderCursor(t, [8, 15 + selectionIndex * 5]),
   ];
 };
