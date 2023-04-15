@@ -1,15 +1,8 @@
 import './style.css';
-import { setupCounter } from './counter.ts';
+
+const canvas = new Array(45).fill(0).map(() => '░'.repeat(80));
+
+canvas[3] = '░'.repeat(33) + 'HyperCartridge' + '░'.repeat(33);
 
 // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
-  <div>
-    <h1>HyperCartridge</h1>
-    <div class="card">
-      <button id="counter" type="button"></button>
-    </div>
-  </div>
-`;
-
-// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-setupCounter(document.querySelector<HTMLButtonElement>('#counter')!);
+document.querySelector<HTMLDivElement>('#app')!.textContent = canvas.join('\n');
