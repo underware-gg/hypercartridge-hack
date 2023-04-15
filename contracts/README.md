@@ -1,6 +1,22 @@
 # HyperCartridge Smart Contracts
 
-Multiplayer NFT Application Cartridges!
+```
+ _____________________
+|   _______________   |
+ \ |_______________| / 
+ | |_____HYPER_____| | 
+ / |___CARTRIDGE___| \ 
+|  |_______________|  |  There once was a cartridge so hyper,
+|                     |  You could mint apps just like a sniper.
+|       Mintable      |  With logic and state,
+|     Multiplayer     |  Collab'ing was great,
+|         NFT         |  And deployable to ENS like a viper!
+|      Cartridges     |
+|                     |
+|                     |
+|__|_______________|__|
+
+```
 
 # Installation
 
