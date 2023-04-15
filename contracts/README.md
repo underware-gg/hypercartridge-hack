@@ -1,6 +1,6 @@
 # HyperCartridge Smart Contracts
-_Freshly baked not-so-smart-not-so-contracts on their way to your local repo!_
 
+Multiplayer NFT Application Cartridges!
 
 # Installation
 
