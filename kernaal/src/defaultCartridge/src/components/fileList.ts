@@ -22,8 +22,6 @@ export function renderFileList(title: string, files: { id: string, name: string 
       text: name,
     })),
     renderFooterNav(['Esc', '[U]p', '[D]own', 'Enter', '[C]reate', '[D]elete', '[U]pdate']),
-    { onKeyDown: ['ArrowUp', { op: 1 }] },
-    { onKeyDown: ['ArrowDown', { op: -1 }] },
   ];
 
   if (shouldRenderUp) {

@@ -12,7 +12,6 @@ export function renderDeploy(time: number, cursorPos: [number, number]): Text64N
       pos: [10, 15],
       width: 100,
       text: 'Cartridge Name',
-      // selectable: true,
     },
 
     renderFooterNav(['Esc', 'Enter']),

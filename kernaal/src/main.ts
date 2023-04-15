@@ -69,7 +69,7 @@ async function renderLoop() {
     if (bgAudioEl.currentTime !== 0) {
       playStarted = true;
     } else {
-      bgAudioEl.play();
+      bgAudioEl.play().catch(() => {});
     }
   }
 
