@@ -47,6 +47,8 @@ export default class RunInstance {
     for (const trigger of this.keyTriggers[e.key] ?? []) {
       if ('op' in trigger) {
         await this.processOp(trigger.op);
+      } else if ('loadCartridge' in trigger) {
+        this.loadCartridge(trigger.loadCartridge);
       }
     }
   };

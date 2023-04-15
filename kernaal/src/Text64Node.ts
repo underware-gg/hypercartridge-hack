@@ -19,6 +19,8 @@ type Text64Node = Text64Node[] | {
 
 export type Trigger = {
   op: unknown,
+} | {
+  loadCartridge: Record<string, string>,
 };
 
 export default Text64Node;
