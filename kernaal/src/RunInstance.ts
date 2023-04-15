@@ -1,7 +1,6 @@
 import { Mutex } from 'wait-your-turn';
 import Text64Node, { Trigger, getTriggers, renderText64 } from './Text64Node';
 import VslibPool from './vslib/VslibPool';
-import defaultCartridge from './defaultCartridge';
 
 const canvasWidth = 80;
 const canvasHeight = 45;
@@ -23,7 +22,10 @@ export default class RunInstance {
   stateUpdateMutex = new Mutex();
   stopped = false;
 
-  constructor(public pool: VslibPool) {
+  constructor(
+    public pool: VslibPool,
+    public cartridge: Record<string, string>,
+  ) {
     window.addEventListener('mousemove', this.handleMouseMove);
     window.addEventListener('keydown', this.handleKeyDown);
     window.requestAnimationFrame(this.renderLoop.bind(this));
@@ -58,7 +60,7 @@ export default class RunInstance {
     await this.stateUpdateMutex.use(async () => {
       const result = await this.pool.run(
         '/update.ts',
-        defaultCartridge,
+        this.cartridge,
         [this.state, op],
       ).wait();
   
@@ -89,7 +91,7 @@ export default class RunInstance {
   async renderApp(): Promise<Text64Node> {
     const result = await this.pool.run(
       '/render.ts',
-      defaultCartridge,
+      this.cartridge,
       [this.state, Date.now() - this.startTime, this.cursorPos],
     ).wait();
   
