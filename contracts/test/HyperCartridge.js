@@ -13,7 +13,7 @@ const [owner, accountOne, accountTwo] = accounts
 const { expect } = require('chai')
 require('chai').should()
 
-const { _deployToken } = require('./deployments.js')
+const { _deployToken } = require('./deployment.js')
 
 //-----------------------------------------------------------------------------------------
 //
