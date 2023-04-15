@@ -73,11 +73,11 @@ truffle compile
 Run all the tests located in `/test`
 
 ```
-truffle test
+npm test
 ```
 
 Run one single test script
 
 ```
-truffle test test/metacoin.js
+npm test test/metacoin.js
 ```
