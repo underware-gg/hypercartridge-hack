@@ -5,7 +5,12 @@ import { renderFooterNav } from './footerNav';
 export function renderTitle(t: number, state: State): Text64Node {
   const { selectionIndex } = state;
 
-  return [
+  let nodes: Text64Node[] = [
+    {
+      pos: [64, 40],
+      width: 100,
+      text: 'v0.0.1',
+    },
     {
       pos: [10, 10],
       width: 100,
@@ -29,4 +34,26 @@ export function renderTitle(t: number, state: State): Text64Node {
     renderFooterNav(['[U]p', '[D]own', 'Enter']),
     renderCursor(t, [8, 15 + selectionIndex * 5]),
   ];
+
+  if (state.selectionIndex === 1) { // Run
+    nodes.push({
+      onKeyDown: ['Enter', {
+        loadCartridge: makeCartridge(state),
+      }],
+    });
+  }
+
+  return nodes;
 };
+
+function makeCartridge(state: State) {
+  return {
+    '/update.ts': `
+      export default function() {
+        return null;
+      }
+    `,
+
+    '/render.ts': state.code.join('\n'),
+  };
+}

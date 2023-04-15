@@ -29,6 +29,8 @@ export type Text64Node = Text64Node[] | {
 
 export type Trigger = {
   op: Operation,
+} | {
+  loadCartridge: Record<string, string>,
 };
 
 export type StandardEvent = {
