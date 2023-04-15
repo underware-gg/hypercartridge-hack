@@ -1,4 +1,4 @@
-import type { Text64Node } from '../Text64Node';
+import type { Text64Node } from '../types.ts';
 
 export function renderFooterNav(hotkeys: string[]): Text64Node {
   let count = 10;

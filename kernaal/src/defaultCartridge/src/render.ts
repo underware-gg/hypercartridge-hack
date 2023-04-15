@@ -2,7 +2,6 @@ import { renderTitle } from './components/title.ts';
 import { renderCodeEditor } from './components/codeEditor.ts';
 import { renderFileList } from './components/fileList.ts';
 import type { State, Text64Node } from './types.ts';
-import { renderFooterNav } from './components/footerNav.ts';
 import { renderDeploy } from './components/deploy.ts';
 import makeDefaultState from './makeDefaultState.ts';
 
@@ -11,11 +10,11 @@ export default function main(state: State | null, t: number, [cx, cy]: [number, 
 
   if (state.page === 'home') {
     return [
-      renderTitle(t, [cx, cy]),
+      renderTitle(t, state),
     ];
   } else if (state.page === 'files') {
     return [
-      renderFileList('CARTI', [
+      renderFileList(t, state, 'CARTI', [
         { id: '1', name: 'file1.ts' },
         { id: '2', name: 'file2.ts' },
         { id: '3', name: 'file3.ts' },
@@ -35,8 +34,12 @@ export default function main(state: State | null, t: number, [cx, cy]: [number, 
       renderDeploy(t, [cx, cy]),
     ];
   } else if (state.page === 'editor') {
-    return [];
+    return [
+      renderCodeEditor(t, state, 0),
+    ];
   }
+
+  return [];
   // return [
   // renderTitle(t, [cx, cy]),
   // renderCodeEditor('file1.ts', [

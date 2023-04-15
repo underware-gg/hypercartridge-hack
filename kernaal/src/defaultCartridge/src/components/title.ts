@@ -1,7 +1,8 @@
 import type { State, Text64Node } from '../types';
+import { renderCursor } from './cursor';
 import { renderFooterNav } from './footerNav';
 
-export function renderTitle(state: State): Text64Node {
+export function renderTitle(t: number, state: State): Text64Node {
   const { selectionIndex } = state;
 
   return [
@@ -26,12 +27,6 @@ export function renderTitle(state: State): Text64Node {
       text: 'Deploy',
     },
     renderFooterNav(['[U]p', '[D]own', 'Enter']),
-    {
-      box: {
-        pos: [1, 1],
-        size: [1, 1],
-        color: 'white',
-      },
-    },
+    renderCursor(t, [8, 15 + selectionIndex * 5]),
   ];
 };
