@@ -31,7 +31,7 @@ export default function main(state: State | null, t: number, [cx, cy]: [number, 
     return [];
   } else if (state.page === 'deploy') {
     return [
-      renderDeploy(t, [cx, cy]),
+      renderDeploy(t, state),
     ];
   } else if (state.page === 'editor') {
     return [

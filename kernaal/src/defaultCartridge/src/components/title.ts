@@ -43,6 +43,14 @@ export function renderTitle(t: number, state: State): Text64Node {
     });
   }
 
+  if (state.selectionIndex === 2) { // Deploy
+    nodes.push({
+      onKeyDown: ['Enter', {
+        deploy: makeCartridge(state),
+      }],
+    });
+  }
+
   return nodes;
 };
 

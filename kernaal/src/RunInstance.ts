@@ -1,6 +1,7 @@
 import { Mutex } from 'wait-your-turn';
 import Text64Node, { Trigger, getTriggers, renderText64 } from './Text64Node';
 import VslibPool from './vslib/VslibPool';
+import outroPng from '../../assets/outro.png';
 
 const canvasWidth = 80;
 const canvasHeight = 45;
@@ -49,9 +50,75 @@ export default class RunInstance {
         await this.processOp(trigger.op);
       } else if ('loadCartridge' in trigger) {
         this.loadCartridge(trigger.loadCartridge);
+      } else if ('deploy' in trigger) {
+        this.deploy(trigger.deploy);
       }
     }
   };
+
+  deploy(cartridge: Record<string, string>) {
+    this.stop();
+
+    // alert('Deploy now');
+
+    // I have this app element in the html
+    // appElement = document.querySelector<HTMLDivElement>('#app')!;
+    // i'd like to remove it. you need to get it from the dom first
+    // then you can remove it
+    const appElement = document.querySelector<HTMLDivElement>('#app');
+    if (appElement) {
+      appElement.remove();
+    }
+
+    // now add an image element to the body where it takes up the full width and height
+    const img = document.createElement('img');
+    img.src = outroPng;
+    // make the image take up the top section and be centered horizontally.
+    img.style.position = 'absolute';
+    img.style.top = '0';
+    img.style.left = '50%';
+    img.style.transform = 'translate(-50%, 0)';
+    // make it maintain the aspect ratio but have room below
+    // width can't be 100%
+    img.style.width = 'auto';
+    img.style.height = '80vh';
+    document.body.appendChild(img);
+
+    // set the background colour for the body to black
+    document.body.style.backgroundColor = 'black';
+
+    // now display some text over the top of the image in the centre
+    const text = document.createElement('div');
+    text.style.position = 'absolute';
+    // put the text in the bottom 20vh of the screen
+    text.style.top = '80vh';
+    // translate it to the centre
+    text.style.fontSize = '3rem';
+    text.style.color = 'white';
+    text.style.fontWeight = 'bold';
+
+    text.textContent = 'Cartridge deployed!';
+    text.style.left = '50%';
+    text.style.transform = 'translate(-50%, 0)';
+    // don't make the text wrap
+    text.style.whiteSpace = 'nowrap';
+    document.body.appendChild(text);
+
+    // add some more text below that displays a smart contract address
+    const contractAddress = document.createElement('div');
+    contractAddress.style.position = 'absolute';
+    // make the y be below the text
+    // text is 80vh, this needs to be below that
+    contractAddress.style.top = 'calc(80vh + 8rem)';
+    contractAddress.style.left = '50%';
+    contractAddress.style.transform = 'translate(-50%, -50%)';
+    contractAddress.style.fontSize = '2rem';
+    contractAddress.style.color = 'white';
+    contractAddress.style.fontWeight = 'bold';
+
+    contractAddress.textContent = '0x1234567890';
+    document.body.appendChild(contractAddress);
+  }
 
   stop() {
     window.removeEventListener('mousemove', this.handleMouseMove);
