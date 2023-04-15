@@ -1,11 +1,12 @@
-import RunInstance from './RunInstance';
+import System from './System';
 import defaultCartridge from './defaultCartridge';
 import './style.css';
 import VslibPool from './vslib/VslibPool';
 
 const pool = new VslibPool();
 
-const instance = new RunInstance(pool, defaultCartridge);
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+const system = new System(pool, defaultCartridge);
 
 const bgAudioEl = document.getElementById('bg-audio') as HTMLAudioElement;
 let playStarted = false;

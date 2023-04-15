@@ -25,6 +25,7 @@ export default class RunInstance {
   constructor(
     public pool: VslibPool,
     public cartridge: Record<string, string>,
+    public loadCartridge: (cartridge: Record<string, string>) => void,
   ) {
     window.addEventListener('mousemove', this.handleMouseMove);
     window.addEventListener('keydown', this.handleKeyDown);
