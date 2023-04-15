@@ -30,5 +30,11 @@ export default function main(t: number, [cx, cy]: [number, number]): Text64Node 
       { id: '9', name: 'file9.ts' },
       { id: '10', name: 'file10.ts' },
     ], 2),
+
+    {
+      pos: [cx, cy],
+      width: 100,
+      text: '█',
+    },
   ];
 }
