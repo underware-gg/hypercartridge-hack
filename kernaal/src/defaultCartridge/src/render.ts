@@ -1,12 +1,4 @@
-type Text64Node = Text64Node[] | {
-  pos: [number, number];
-  child: Text64Node;
-} | {
-  pos: [number, number];
-  width: number; // TODO: Optional
-  text: string;
-  color?: string;
-};
+import type { Text64Node } from './Text64Node.ts';
 
 export default function main(t: number, [cx, cy]: [number, number]): Text64Node {
   return [

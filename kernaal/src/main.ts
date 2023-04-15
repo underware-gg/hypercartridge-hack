@@ -1,7 +1,7 @@
 import Text64Node, { renderText64 } from './Text64Node';
 import './style.css';
 import VslibPool from './vslib/VslibPool';
-import renderSource from './defaultCartridge/render.ts?raw';
+import defaultCartridge from './defaultCartridge/index.ts';
 
 const canvasWidth = 80;
 const canvasHeight = 45;
@@ -36,9 +36,11 @@ async function renderLoop() {
 }
 
 async function renderApp(t: number, cursorPos: [number, number]): Promise<Text64Node> {
-  const result = await pool.run('/render.ts', {
-    '/render.ts': renderSource,
-  }, [t, cursorPos]).wait();
+  const result = await pool.run(
+    '/render.ts',
+    defaultCartridge,
+    [t, cursorPos],
+  ).wait();
 
   if ('Err' in result.output) {
     return [
