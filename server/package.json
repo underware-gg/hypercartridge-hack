@@ -1,8 +1,11 @@
 {
   "name": "hypercartridge-server",
   "module": "src/index.ts",
-  "type": "module",
   "devDependencies": {
     "bun-types": "^0.5.0"
+  },
+  "type": "module",
+  "dependencies": {
+    "ethers": "5"
   }
 }
