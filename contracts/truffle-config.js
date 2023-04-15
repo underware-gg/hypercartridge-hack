@@ -45,11 +45,11 @@ module.exports = {
       port: 7545,            // Standard Ethereum port (default: none)
       network_id: "*",       // Any network (default: none)
     },
-    goerli: {
-      provider: () => new HDWalletProvider(process.env.MNEMONIC, `https://goerli.infura.io/v3/${process.env.INFURA_PROJECT_ID}`),
-      network_id: 5,       // Goerli's id
-      chain_id: 5,
-      from: '0xA617fFD80478E7281C7cd00b82205cfd172Bb03C'
+    chiado: {
+      provider: () => new HDWalletProvider(process.env.MNEMONIC, `https://rpc.chiadochain.net`),
+      network_id: 10200,
+      chain_id: 10200,
+      from: '0x8E827f26614354447c35E41ad73F2Db467C8fdEd'
     }
 	},
 
