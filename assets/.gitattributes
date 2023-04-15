@@ -2,3 +2,4 @@
 Biodecay[[:space:]]-[[:space:]]Commodore[[:space:]]64.aup3 filter=lfs diff=lfs merge=lfs -text
 Biodecay[[:space:]]-[[:space:]]Commodore[[:space:]]64.mp3 filter=lfs diff=lfs merge=lfs -text
 HyperCartridge-theme.mp3 filter=lfs diff=lfs merge=lfs -text
+hypercartridge-outro.png filter=lfs diff=lfs merge=lfs -text
