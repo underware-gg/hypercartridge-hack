@@ -38,7 +38,7 @@ async function renderLoop() {
 async function renderApp(t: number, cursorPos: [number, number]): Promise<Text64Node> {
   const result = await pool.run('/render.ts', {
     '/render.ts': renderSource,
-  }).wait();
+  }, [t, cursorPos]).wait();
 
   if ('Err' in result.output) {
     return [

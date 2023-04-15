@@ -8,12 +8,12 @@ type Text64Node = Text64Node[] | {
   color?: string;
 };
 
-export default function main(): Text64Node {
+export default function main(t: number, [cx, cy]: [number, number]): Text64Node {
   return [
     {
       pos: [10, 10],
       width: 100,
-      text: 'HyperCartridge',
+      text: `HyperCartridge t: ${Math.floor(t/1000)}, cursor: (${cx}, ${cy})`,
     },
   ];
 }
