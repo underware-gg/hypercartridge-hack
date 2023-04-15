@@ -1,8 +1,20 @@
+import { renderText64 } from './Text64Node';
 import './style.css';
 
-const canvas = new Array(45).fill(0).map(() => '░'.repeat(80));
-
-canvas[3] = '░'.repeat(33) + 'HyperCartridge' + '░'.repeat(33);
-
 // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-document.querySelector<HTMLDivElement>('#app')!.textContent = canvas.join('\n');
+const appElement = document.querySelector<HTMLDivElement>('#app')!;
+
+appElement.appendChild(
+  renderText64([80, 45], [
+    {
+      pos: [10, 10],
+      width: 100,
+      text: 'HyperCartridge',
+    },
+    {
+      pos: [10, 11],
+      width: 1,
+      text: 'yperCartridge',
+    },
+  ]),
+);
