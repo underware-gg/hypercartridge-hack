@@ -9,7 +9,7 @@ export function renderTitle(t: number, state: State): Text64Node {
     {
       pos: [64, 40],
       width: 100,
-      text: 'v0.0.1',
+      text: 'v0.1.0',
     },
     {
       pos: [10, 10],
