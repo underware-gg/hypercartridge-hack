@@ -1,23 +1,23 @@
-import  Text64Node from "../Text64Node";
+import { type Text64Node } from "../Text64Node";
 
-const NUM_ELEMENTS = 6; 
-const SPACING = 3; 
+export function renderFileList(cartName: string, files: { id: string, name: string }[], offset: number): Text64Node {
+    const NUM_ELEMENTS = 6;
+    const SPACING = 3;
 
-export const renderCodeEditor = (filename: string, code: string[], offset: number): Text64Node => {
     const shouldRenderUp = offset > 0;
-    const shouldRenderDown = offset + NUM_ELEMENTS < code.length;
-    const renderedCode = code.slice(offset, offset + NUM_ELEMENTS);
+    const shouldRenderDown = offset + NUM_ELEMENTS < files.length;
+    const renderedFiles = files.slice(offset, offset + NUM_ELEMENTS);
 
-    const nodes: Text64Node = [
+    let nodes: Text64Node = [
         {
             pos: [10, 10],
             width: 100,
-            text: `[${filename}]`,
+            text: `[${cartName}]`,
         },
-        renderedCode.map((line, index) => ({
+        renderedFiles.map(({ name }, index) => ({
             pos: [10, 16 + index * SPACING],
             width: 100,
-            text: line,
+            text: name,
         }))
     ];
 
