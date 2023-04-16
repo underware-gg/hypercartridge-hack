@@ -35,6 +35,14 @@ document.body.appendChild(text);
 
 let bgAudioStarted = false;
 
+let cartridge = Promise.resolve(defaultCartridge);
+
+if (location.hash.startsWith('#/')) {
+  cartridge = fetch(
+    'https://cloudflare-ipfs.com/ipfs/' + location.hash.slice(2),
+  ).then(res => res.json());
+}
+
 // add an event listener for any key, when any key is pressed remove the image and text and stop playing the music.
 document.addEventListener('keyup', async () => {
   if (bgAudioStarted) {
@@ -44,16 +52,8 @@ document.addEventListener('keyup', async () => {
 
     const pool = new VslibPool();
 
-    let cartridge = defaultCartridge;
-
-    if (location.hash.startsWith('#/')) {
-      cartridge = await fetch(
-        'https://cloudflare-ipfs.com/ipfs/' + location.hash.slice(2),
-      ).then(res => res.json());
-    }
-
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const system = new System(pool, cartridge);
+    const system = new System(pool, await cartridge);
   }
   bgAudioStarted = true;
   // change the text to say press any key to continue
