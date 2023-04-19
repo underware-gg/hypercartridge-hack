@@ -13,8 +13,8 @@
  |     Application     |  And deployable to ENS like a viper!
  |      Cartridges     |
  |                     |
- |                     |
- |__|_______________|__|
+ |        v0.1.0       |
+ |__!_______________!__|
 
 ```
 
