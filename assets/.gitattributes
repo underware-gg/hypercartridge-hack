@@ -9,3 +9,8 @@ hypercartridge.png filter=lfs diff=lfs merge=lfs -text
 Biodecay[[:space:]]-[[:space:]]The[[:space:]]Loneliness[[:space:]]of[[:space:]]Vacuum.aup3 filter=lfs diff=lfs merge=lfs -text
 Biodecay[[:space:]]-[[:space:]]The[[:space:]]Loneliness[[:space:]]of[[:space:]]Vacuum.mp3 filter=lfs diff=lfs merge=lfs -text
 hyperbox-outro.mp3 filter=lfs diff=lfs merge=lfs -text
+outro.png filter=lfs diff=lfs merge=lfs -text
+redfill.vs filter=lfs diff=lfs merge=lfs -text
+hypercartridge-banner.png filter=lfs diff=lfs merge=lfs -text
+intro.gif filter=lfs diff=lfs merge=lfs -text
+helloworld.vs filter=lfs diff=lfs merge=lfs -text

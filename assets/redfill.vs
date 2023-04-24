@@ -1,14 +1,3 @@
-// Fills the screen with red, oh no!
-export default function(_, t) {
-    const tick = t % 3600
-    let ops = []
-    for (let i = 0; i < tick; ++i) {
-        const x = i  % 80 - 1
-        const y = Math.floor(i / 80)
-
-        ops.push({
-            pos: [x, y], width: 100, text: ' ', bgColor: 'red',
-        })
-    }
-    return ops
-}
+version https://git-lfs.github.com/spec/v1
+oid sha256:6860f0463b4c12d00961ed2cafb7b981f6fc6ff41aaaa12030a120b1d15fdfcf
+size 333
