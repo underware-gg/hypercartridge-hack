@@ -1,5 +1,6 @@
 import { exec } from 'child_process';
 import * as fs from 'fs';
+import https from 'https';
 
 import * as ethers from 'ethers';
 
@@ -19,37 +20,82 @@ export default {
     if (url.pathname === '/deploy') {
       const { address, cartridge } = await request.json();
 
-      fs.writeFileSync('cartridge.json', JSON.stringify(cartridge));
+      const options = {
+        host: 'ipfs.infura.io',
+        port: 5001,
+        path: '/api/v0/add',
+        method: 'POST',
+        auth: config.infura.id + ':' + config.infura.secret,
+      };
 
       const ipfsRes = JSON.parse(await new Promise((resolve, reject) => {
-        exec(
-          `curl -X POST -F file=@cartridge.json -u "${config.infura.id}:${config.infura.secret}" "https://ipfs.infura.io:5001/api/v0/add"`,
-          (err, stdout, stderr) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(stdout);
-            }
-          }
-        );
+        let req = https.request(options, (res) => {
+          let body = '';
+          res.on('data', function (chunk) {
+            body += chunk;
+          });
+          res.on('end', function () {
+            resolve(body);
+          });
+          res.on('error', reject);
+        });
+
+        req.end();
       }));
 
-      const cartridgeUrl = `${config.ideUrl}/#/${ipfsRes.Hash}`;
+      // const form = new FormData();
 
-      console.log("minting");
-      await (await hyperCartridge.mint(wallet.address, cartridgeUrl)).wait();
-      console.log("minted");
-      const tokenId = (await hyperCartridge.totalSupply()).toNumber();
+      // form.append(
+      //   'file',
+      //   new Blob(
+      //     [JSON.stringify(cartridge)],
+      //     // { type: 'application/octet-stream' },
+      //   ),
+      //   // 'cartridge.json',
+      // );
 
-      console.log("transferring");
-      await (await hyperCartridge.transferFrom(wallet.address, address, tokenId)).wait();
-      console.log("transferred");
+      // const ipfsRes = await fetch('https://ipfs.infura.io:5001/api/v0/add', {
+      //   method: 'POST',
+      //   headers: {
+      //     Authorization: `Basic ${Buffer.from(`${config.infura.id}:${config.infura.secret}`).toString('base64')}`,
+      //     // 'Content-Type': 'application/octet-stream',
+      //     // 'Content-Type': 'multipart/form-data'
+      //   },
+      //   body: form,
+      // }).then(res => res.text());
+
+      // fs.writeFileSync('cartridge.json', JSON.stringify(cartridge));
+
+      // const ipfsRes = JSON.parse(await new Promise((resolve, reject) => {
+      //   exec(
+      //     `curl -X POST -F file=@cartridge.json -u "${config.infura.id}:${config.infura.secret}" "https://ipfs.infura.io:5001/api/v0/add"`,
+      //     (err, stdout, stderr) => {
+      //       if (err) {
+      //         reject(err);
+      //       } else {
+      //         resolve(stdout);
+      //       }
+      //     }
+      //   );
+      // }));
+
+      // const cartridgeUrl = `${config.ideUrl}/#/${ipfsRes.Hash}`;
+
+      // console.log("minting");
+      // await (await hyperCartridge.mint(wallet.address, cartridgeUrl)).wait();
+      // console.log("minted");
+      // const tokenId = (await hyperCartridge.totalSupply()).toNumber();
+
+      // console.log("transferring");
+      // await (await hyperCartridge.transferFrom(wallet.address, address, tokenId)).wait();
+      // console.log("transferred");
 
       return new Response(JSON.stringify({
         chainId: provider.network.chainId,
         nftAddress: config.hyperCartridgeAddress,
-        tokenId,
-        state: cartridgeUrl,
+        // tokenId,
+        // state: cartridgeUrl,
+        ipfsRes,
       }));
     }
 
